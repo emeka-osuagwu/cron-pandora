@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Services\RequestService
+namespace App\Http\Services;
 
+use Log;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 
 class RequestService
 {
-	function __construct(GuzzleHttp $http)
+	function __construct(Client $http)
 	{
 		$this->http = $http;
 	}
@@ -15,23 +16,21 @@ class RequestService
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handle($method, $endpoint, $data)
+	public function handle($method, $endpoint, $data=null)
 	{
-	    $data = json_encode($data);
 
+	    $data ? $data : json_encode($data);
+	
 	    try 
 	    {
-	        $response = $this->http->request('GET', 'http://httpbin.org', [
-	            'query' => ['foo' => 'bar']
-	        ]);
+	        $response = $this->http->request($method, $endpoint, $data);
 
-	        return json_decode($response->getBody(), true);
+	        $data = json_decode($response->getBody(), true);
+			Log::info($data);
 	    } 
-	    catch (ClientException $exception) 
+	    catch (RequestException $exception) 
 	    {
 	        Log::info($exception->getMessage());
-	        // return $exception->getMessage();
-	        return "error";
 	    }
 	}
 

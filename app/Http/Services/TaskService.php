@@ -8,7 +8,7 @@ class TaskService
 {
 	public function getAllTasks()
 	{
-		return Task::get();
+		return Task::all();
 	}
 
 }
