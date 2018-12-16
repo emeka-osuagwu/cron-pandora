@@ -17,6 +17,9 @@ class Tasks extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('callback_url');
+            $table->string('status');
+            $table->data('period');
+            $table->string('service_response')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

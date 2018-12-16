@@ -13,6 +13,9 @@ class Task extends Model
 	 */
 	protected $fillable = [
 	    'title', 
-	    'callback_url'
+	    'status', 
+	    'period', 
+	    'callback_url',
+	    'service_response'
 	];
 }
