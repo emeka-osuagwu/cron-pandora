@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Log;
 
+use App\Http\Services\RequestService;
+
 use Illuminate\Console\Command;
 
 class Base extends Command
