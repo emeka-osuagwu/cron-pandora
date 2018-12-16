@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Log;
+
 use Illuminate\Console\Command;
 
 class Base extends Command
