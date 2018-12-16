@@ -3,9 +3,8 @@
 namespace App\Console\Commands;
 
 use Log;
-
+use App\Console\Commands\TaskRunner;
 use App\Http\Services\RequestService;
-
 use Illuminate\Console\Command;
 
 class Base extends Command
@@ -39,8 +38,9 @@ class Base extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(TaskRunner $runner)
     {
         Log::info('Running daily schedules');
+        $runner->run();
     }
 }
