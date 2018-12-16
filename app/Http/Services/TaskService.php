@@ -8,7 +8,14 @@ class TaskService
 {
 	public function getAllTasks()
 	{
-		return Task::all();
+		return Task::get();
+	}
+
+	public function updateTask($data)
+	{
+		// $task = Task::where('id', $data['task_id'])->update($data);
+
+		// dd($task);
 	}
 
 }

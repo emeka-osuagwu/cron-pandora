@@ -16,10 +16,16 @@ class Tasks extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('description')->nullable();
+            $table->string('state')->default('active');
+            $table->string('status')->default('pending');
+            
+            $table->enum('period', ['hourly', 'daily', 'weekly', 'monthly', 'yearly']);
+            $table->enum('time_period', ['am', 'pm']);
+            $table->time('time');
             $table->string('callback_url');
-            $table->string('status');
-            $table->data('period');
             $table->string('service_response')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -11,6 +11,6 @@ class TakesTableSeeder extends Seeder
      */
     public function run()
     {
-    	factory(App\Models\Task::class, 100)->create();
+    	factory(App\Models\Task::class, 10)->create();
     }
 }

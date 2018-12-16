@@ -18,15 +18,14 @@ class RequestService
 	 */
 	public function handle($method, $endpoint, $data=null)
 	{
-
 	    $data ? $data : json_encode($data);
 	
 	    try 
 	    {
 	        $response = $this->http->request($method, $endpoint, $data);
 
-	        $data = json_decode($response->getBody(), true);
 			Log::info($data);
+	        return $data = json_decode($response->getBody(), true);
 	    } 
 	    catch (RequestException $exception) 
 	    {

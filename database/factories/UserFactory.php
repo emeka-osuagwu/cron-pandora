@@ -26,6 +26,9 @@ $factory->define(App\Models\User::class, function (Faker $faker) {
 $factory->define(App\Models\Task::class, function (Faker $faker) {
     return [
         'title' => $faker->name,
-        'callback_url' => "http://localhost:3333"
+        'time' => Carbon\Carbon::now(),
+        'period' => "daily",
+        'time_period' => "pm",
+        'callback_url' => "http://localhost:3333",
     ];
 });

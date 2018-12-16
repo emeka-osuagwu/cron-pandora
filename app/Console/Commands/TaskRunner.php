@@ -26,18 +26,25 @@ class TaskRunner
 	{
 		Log::info(LogStyle('Staring TaskRunner'));
 		$this->task = collect($this->taskService->getAllTasks());
-
 		$this->runDailyTask();
 	}
 
 	public function runDailyTask()
 	{
-		$daily_task = $this->task;
+		$daily_task = $this->task->where('period', 'daily');
 
 		Log::info(LogStyle('Running ' . $daily_task->count() . ' Daily Task'));
 		
 		foreach ($daily_task as $task) {
-			$this->requestService->handle('GET', $daily_task->first()->callback_url, ['query' => ['foo' => 'bar']]);
+			
+			$response = $this->requestService->handle('GET', $daily_task->first()->callback_url, ['query' => ['foo' => 'bar']]);
+			
+			$update_data = [
+				'service_response' => json_encode($response),
+				'status' => 'completed',
+			];
+
+			$task->update($update_data);
 		}
 	}
 }

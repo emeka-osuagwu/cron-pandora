@@ -12,9 +12,12 @@ class Task extends Model
 	 * @var array
 	 */
 	protected $fillable = [
+	    'time', 
 	    'title', 
 	    'status', 
 	    'period', 
+	    'time_period',
+	    'description', 
 	    'callback_url',
 	    'service_response'
 	];
